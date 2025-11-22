@@ -11,9 +11,9 @@ var randomized_pokedex = {}
 const POKEMON_SPRITE_BASE_URL = "https://img.pokemondb.net/sprites/black-white/normal/"
 
 # Lerp constant for smooth progress bar animation
-const BAR_LERP_SPEED = 0.1 
+const BAR_LERP_SPEED = 0.1
 # Maximum possible stat value for progress bar calculation (Standard max base stat in core games is 255)
-const MAX_BASE_STAT = 255 
+const MAX_BASE_STAT = 255
 
 # --- Node References (Must match your scene structure) ---
 @onready var file_dialog = $FileDialog
@@ -81,6 +81,13 @@ func _ready():
 	
 	# 4. Connecting the selection signal (needed for the next step)
 	results_list.item_selected.connect(_on_SearchResultsList_item_selected)
+	
+	# 5. NEW: Connect the focus signal for select_all functionality
+	if is_instance_valid(search_line_edit):
+		search_line_edit.connect("focus_entered", _on_search_line_edit_focus_entered)
+	
+	# NOTE: TextEdit does not have 'text_submitted'. We handle Enter press
+	# using the _unhandled_input function instead.
 
 # Called every frame to smooth the progress bar movement
 func _process(_delta):
@@ -301,7 +308,12 @@ func parse_log_file(log_content: String):
 # ==============================================================================
 # 3. SEARCH & AUTCOMPLETE LOGIC
 # ==============================================================================
-
+func _input(event):
+	if search_line_edit.has_focus():
+		if event is InputEventKey and event.is_pressed():
+			if event.key_label == KEY_SPACE or event.key_label == KEY_ENTER:
+				get_viewport().set_input_as_handled()
+				_select_first_result()
 # Function connected to the 'text_changed' signal of SearchLineEdit.
 func _on_SearchLineEdit_text_changed():
 	if is_log_loaded and is_instance_valid(search_line_edit):
@@ -376,7 +388,45 @@ func _on_SearchResultsList_item_selected(index: int):
 		update_pokemon_ui(loaded_pokemon)
 	pass
 
-# --- NEW FUNCTION: Updates all UI labels and sets progress bar targets ---
+# --- NEW FUNCTION: The core logic to select the first item ---
+func _select_first_result():
+	# Ensure the list is valid and has at least one item
+	if is_instance_valid(results_list) and results_list.item_count > 0:
+		# Automatically select the first item (index 0) in the results list
+		var index_to_select = 0
+		
+		# Manually set the selected item in the list for visual feedback
+		results_list.select(index_to_select, true)
+		
+		# Now, manually trigger the selection logic using the existing signal handler
+		_on_SearchResultsList_item_selected(index_to_select)
+		
+		# Return focus to the search bar 
+		search_line_edit.grab_focus()
+
+# --- Override input to handle Enter Key press in the TextEdit search bar ---
+func _unhandled_input(event):
+	# Check if the event is a key press, the key is pressed (not released), 
+	# and the TextEdit node is currently focused.
+	if is_instance_valid(search_line_edit) and search_line_edit.has_focus():
+		if event is InputEventKey and event.pressed:
+			# Check for Enter key (or Numpad Enter)
+			if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
+				# Consume the input event so TextEdit doesn't process it as a newline
+				get_viewport().set_input_as_handled()
+				
+				# Perform the selection logic
+				_select_first_result()
+				return # Stop further processing
+	pass
+
+# --- FIX APPLIED HERE: Defer the select_all call ---
+func _on_search_line_edit_focus_entered() -> void:
+	# CRITICAL FIX: Use call_deferred to wait for the engine's internal focus logic 
+	# to finish before applying the selection. This prevents the engine from clearing it.
+	search_line_edit.call_deferred("select_all")
+
+# --- Updates all UI labels and sets progress bar targets ---
 func update_pokemon_ui(data: Dictionary):
 	if data.is_empty() or data.has("error"):
 		# Clear UI if data is missing or invalid
