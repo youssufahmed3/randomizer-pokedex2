@@ -1,0 +1,227 @@
+[gd_scene load_steps=6 format=3 uid="uid://rj7xjbvomao1"]
+
+[ext_resource type="Script" uid="uid://dlfsjy8pmmb5a" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="FontFile" uid="uid://f1wq1nfd60uv" path="res://m5x7.ttf" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://c8gvapwb045v5" path="res://absol.png" id="3_h2yge"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2yge"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.5568628, 0.84313726, 0.29411766, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_0xm2m")
+
+[node name="LoadButton" type="Button" parent="."]
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 339.49997
+offset_bottom = 132.99998
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+text = "LOAD LOG"
+
+[node name="SearchLineEdit" type="TextEdit" parent="."]
+offset_left = 83.0
+offset_top = 553.0
+offset_right = 861.0
+offset_bottom = 703.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+placeholder_text = "Search...."
+context_menu_enabled = false
+emoji_menu_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="FileDialog" type="FileDialog" parent="."]
+oversampling_override = 1.0
+use_native_dialog = true
+
+[node name="FilePathLabel" type="Label" parent="."]
+offset_left = 153.0
+offset_top = 10.0
+offset_right = 1037.9999
+offset_bottom = 129.99998
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+text = "sdasdasda"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(136, 372)
+scale = Vector2(4, 4)
+texture = ExtResource("3_h2yge")
+
+[node name="TypeLabel" type="Label" parent="."]
+offset_left = 56.0
+offset_top = 155.0
+offset_right = 446.0
+offset_bottom = 231.66669
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+
+[node name="AbilityLabel" type="Label" parent="."]
+offset_left = 52.0
+offset_top = 100.00001
+offset_right = 442.0
+offset_bottom = 176.66669
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+
+[node name="HPLabel" type="Label" parent="."]
+offset_left = 274.0
+offset_top = 498.00003
+offset_right = 355.6667
+offset_bottom = 558.0
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+text = "100"
+horizontal_alignment = 1
+
+[node name="AttackLabel" type="Label" parent="."]
+offset_left = 328.0
+offset_top = 498.00003
+offset_right = 409.6667
+offset_bottom = 558.0
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+text = "100"
+horizontal_alignment = 1
+
+[node name="DefenseLabel" type="Label" parent="."]
+offset_left = 380.0
+offset_top = 498.00003
+offset_right = 461.6667
+offset_bottom = 558.0
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+text = "100"
+horizontal_alignment = 1
+
+[node name="SpAttackLabel" type="Label" parent="."]
+offset_left = 433.0
+offset_top = 498.0
+offset_right = 514.6667
+offset_bottom = 558.0
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+text = "100"
+horizontal_alignment = 1
+
+[node name="SpDefenseLabel" type="Label" parent="."]
+offset_left = 487.0
+offset_top = 498.0
+offset_right = 568.6667
+offset_bottom = 558.0
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+text = "100"
+horizontal_alignment = 1
+
+[node name="SpeedLabel" type="Label" parent="."]
+offset_left = 539.0
+offset_top = 498.0
+offset_right = 620.6667
+offset_bottom = 558.0
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+text = "100"
+horizontal_alignment = 1
+
+[node name="SearchResultsList" type="ItemList" parent="."]
+offset_left = 145.0
+offset_top = 641.0
+offset_right = 420.0
+offset_bottom = 782.0
+max_text_lines = 5
+item_count = 1
+item_0/text = "s"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 285.0
+offset_top = 267.0
+offset_right = 312.0
+offset_bottom = 501.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+max_value = 200.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="."]
+offset_left = 338.0
+offset_top = 267.0
+offset_right = 365.0
+offset_bottom = 501.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+max_value = 200.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ProgressBar3" type="ProgressBar" parent="."]
+offset_left = 391.0
+offset_top = 267.0
+offset_right = 418.0
+offset_bottom = 501.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+max_value = 200.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ProgressBar4" type="ProgressBar" parent="."]
+offset_left = 443.0
+offset_top = 267.0
+offset_right = 470.0
+offset_bottom = 501.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+max_value = 200.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ProgressBar5" type="ProgressBar" parent="."]
+offset_left = 497.0
+offset_top = 267.0
+offset_right = 524.0
+offset_bottom = 501.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+max_value = 200.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ProgressBar6" type="ProgressBar" parent="."]
+offset_left = 548.0
+offset_top = 267.0
+offset_right = 575.0
+offset_bottom = 501.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+max_value = 200.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[connection signal="pressed" from="LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
