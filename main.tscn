@@ -1,8 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://rj7xjbvomao1"]
+[gd_scene load_steps=13 format=3 uid="uid://rj7xjbvomao1"]
 
 [ext_resource type="Script" uid="uid://dlfsjy8pmmb5a" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="FontFile" uid="uid://f1wq1nfd60uv" path="res://m5x7.ttf" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://c8gvapwb045v5" path="res://absol.png" id="3_h2yge"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.1882353, 0.18431373, 0.16470589, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
+bg_color = Color(0.1251151, 0.1633972, 0.12636474, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2yge"]
 
@@ -27,6 +33,24 @@ bg_color = Color(0.7411765, 0.23137255, 0.654902, 1)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0xm2m")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 601.0
+offset_bottom = 99.0
+color = Color(0.10880131, 0.18067473, 0.35337195, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_top = 92.0
+offset_right = 601.0
+offset_bottom = 538.0
+color = Color(0.18807155, 0.18411666, 0.16673112, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = -1.0
+offset_top = 538.0
+offset_right = 600.0
+offset_bottom = 801.0
+color = Color(0.14031541, 0.13714147, 0.12444819, 1)
+
 [node name="LoadButton" type="Button" parent="."]
 offset_left = 7.0
 offset_top = 8.0
@@ -37,18 +61,27 @@ theme_override_fonts/font = ExtResource("1_ig7tw")
 theme_override_font_sizes/font_size = 64
 text = "LOAD LOG"
 
-[node name="SearchLineEdit" type="TextEdit" parent="."]
-offset_left = 83.0
-offset_top = 553.0
-offset_right = 861.0
-offset_bottom = 703.0
-scale = Vector2(0.5, 0.5)
+[node name="PokemonButton" type="Button" parent="."]
+offset_left = 10.0
+offset_top = 63.999996
+offset_right = 449.99997
+offset_bottom = 134.00002
+scale = Vector2(0.4, 0.4)
 theme_override_fonts/font = ExtResource("1_ig7tw")
 theme_override_font_sizes/font_size = 64
-placeholder_text = "Search...."
-context_menu_enabled = false
-emoji_menu_enabled = false
-deselect_on_focus_loss_enabled = false
+theme_override_styles/normal = SubResource("StyleBoxFlat_h2yge")
+text = "POKEMON"
+
+[node name="LearnsetButton" type="Button" parent="."]
+offset_left = 195.99998
+offset_top = 63.999996
+offset_right = 635.99994
+offset_bottom = 134.00002
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c57u")
+text = "LEARNSET"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 oversampling_override = 1.0
@@ -57,12 +90,13 @@ use_native_dialog = true
 [node name="FilePathLabel" type="Label" parent="."]
 offset_left = 153.0
 offset_top = 10.0
-offset_right = 1037.9999
-offset_bottom = 129.99998
-scale = Vector2(0.4, 0.4)
+offset_right = 876.33325
+offset_bottom = 176.66667
+scale = Vector2(0.3, 0.3)
 theme_override_fonts/font = ExtResource("1_ig7tw")
 theme_override_font_sizes/font_size = 64
 text = "sdasdasda"
+autowrap_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(136, 372)
@@ -154,18 +188,6 @@ theme_override_fonts/font = ExtResource("1_ig7tw")
 theme_override_font_sizes/font_size = 64
 text = "100"
 horizontal_alignment = 1
-
-[node name="SearchResultsList" type="ItemList" parent="."]
-offset_left = 145.0
-offset_top = 641.0
-offset_right = 814.9999
-offset_bottom = 990.9999
-scale = Vector2(0.4, 0.4)
-theme_override_fonts/font = ExtResource("1_ig7tw")
-theme_override_font_sizes/font_size = 64
-max_text_lines = 5
-item_count = 1
-item_0/text = "s"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
@@ -307,5 +329,41 @@ theme_override_font_sizes/font_size = 64
 text = "Spd"
 horizontal_alignment = 1
 
+[node name="LearnsetScreen" type="Node2D" parent="."]
+
+[node name="ColorRect4" type="ColorRect" parent="LearnsetScreen"]
+offset_top = 92.0
+offset_right = 601.0
+offset_bottom = 538.0
+color = Color(0.1254902, 0.16470589, 0.1254902, 1)
+
+[node name="SearchLineEdit" type="TextEdit" parent="."]
+offset_left = 381.0
+offset_top = 11.0
+offset_right = 801.0
+offset_bottom = 93.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+placeholder_text = "Search...."
+context_menu_enabled = false
+emoji_menu_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="SearchResultsList" type="ItemList" parent="."]
+offset_left = 386.0
+offset_top = 51.0
+offset_right = 886.0
+offset_bottom = 114.0
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 64
+max_text_lines = 5
+auto_height = true
+item_count = 1
+item_0/text = "s"
+
 [connection signal="pressed" from="LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="pressed" from="PokemonButton" to="." method="_on_pokemon_button_pressed"]
+[connection signal="pressed" from="LearnsetButton" to="." method="_on_learnset_button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

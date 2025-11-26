@@ -72,7 +72,7 @@ func _ready():
 	# 2. Initial UI State
 	file_path_label.text = "Click 'Load Log File' to load your randomized data."
 	search_line_edit.editable = false # Disable search until log is loaded
-	search_line_edit.placeholder_text = "Load a log file first..."
+	search_line_edit.placeholder_text = "Load a log..."
 	results_list.clear()
 
 	# 3. CRITICAL: Programmatic signal connection for search
@@ -126,11 +126,11 @@ func set_is_log_loaded(value):
 		print("Log data successfully loaded into randomized_pokedex.")
 		# Enable the search bar once the data is ready
 		search_line_edit.editable = true
-		search_line_edit.placeholder_text = "Start typing a Pokémon name..."
+		search_line_edit.placeholder_text = "Pokémon name..."
 		
 	else:
 		search_line_edit.editable = false
-		search_line_edit.placeholder_text = "Load a log file first..."
+		search_line_edit.placeholder_text = "Load a log file..."
 		results_list.clear() # Clear results if we lose data
 		# Also clear the loaded Pokémon data
 		loaded_pokemon = {}
@@ -560,3 +560,9 @@ func _on_http_request_completed(result, response_code, _headers, body):
 	else:
 		printerr("Error loading image from buffer: %s" % error_string(error))
 		sprite.texture = null # Clear on image decoding failure
+
+func _on_pokemon_button_pressed() -> void:
+	$LearnsetScreen.visible = false
+
+func _on_learnset_button_pressed() -> void:
+	$LearnsetScreen.visible = true
